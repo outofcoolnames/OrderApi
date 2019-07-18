@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Text;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
-using OrderApi.Utils;
 
 namespace OrderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
-    {
-        private readonly IHttpUtils _httpUtils;
-        public ProductController(IHttpUtils httpUtils)
-        {
-            _httpUtils = httpUtils;
-        }
+    {   
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -38,8 +33,10 @@ namespace OrderApi.Controllers
         [HttpPost]
         public void Post([FromBody] CreateOrder dto)
         {
-            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-            var client = _httpUtils.GetUserNameAndPassword(authHeader.Parameter).Key;
+            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]).Parameter;
+            string decodedToken = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader));            
+            var client = decodedToken.Substring(0, decodedToken.IndexOf(":"));
+            //todo: construct entity and store order
 
         }       
     }

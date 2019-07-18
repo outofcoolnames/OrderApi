@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Entities", "OrderA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.DAL", "OrderApi.DAL\OrderApi.DAL.csproj", "{76984D69-19CF-4BE2-8077-0C16B9BD2101}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Utils", "OrderApi.Utils\OrderApi.Utils.csproj", "{F73435BE-C911-4CA7-904B-A5C02A08930E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Service", "OrderApi.Service\OrderApi.Service.csproj", "{42595617-DB2B-4008-A4E9-155A97CC89A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.ModelFactory", "OrderApi.ModelFactory\OrderApi.ModelFactory.csproj", "{0AFBB0C9-E565-4C2C-96FD-25DD5D5824BA}"
@@ -45,10 +43,6 @@ Global
 		{76984D69-19CF-4BE2-8077-0C16B9BD2101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76984D69-19CF-4BE2-8077-0C16B9BD2101}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76984D69-19CF-4BE2-8077-0C16B9BD2101}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F73435BE-C911-4CA7-904B-A5C02A08930E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F73435BE-C911-4CA7-904B-A5C02A08930E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F73435BE-C911-4CA7-904B-A5C02A08930E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F73435BE-C911-4CA7-904B-A5C02A08930E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42595617-DB2B-4008-A4E9-155A97CC89A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42595617-DB2B-4008-A4E9-155A97CC89A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42595617-DB2B-4008-A4E9-155A97CC89A9}.Release|Any CPU.ActiveCfg = Release|Any CPU

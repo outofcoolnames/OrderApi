@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Service;
-using OrderApi.Utils;
 
 namespace OrderApi
 {
@@ -28,7 +27,7 @@ namespace OrderApi
             services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             // configure DI for application services
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,16 +41,11 @@ namespace OrderApi
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }
+            }            
 
             app.UseHttpsRedirection();
             app.UseMvc();
-
-            // configure DI
-            var builder = new ContainerBuilder();
-            builder.RegisterType<UserService>().As<IUserService>();
-            builder.RegisterType<HttpUtils>().As<IHttpUtils>().SingleInstance();
-
+            
             // configure basic authentication 
             app.UseAuthentication();
         }
