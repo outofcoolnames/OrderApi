@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OrderApi.DAL
 {
-    public class OrderApiDAL
+    public class OrderApiDAL : IOrderApiDAL
     {
         private readonly IConfiguration _configuration = null;
         public OrderApiDAL(IConfiguration configuration)
@@ -21,11 +21,11 @@ namespace OrderApi.DAL
         public IOrderEntity Insert(IOrderEntity createOrderEntity)
         {
             var existingOrders = GetOrders(createOrderEntity.Client);
-            if(existingOrders.Count>0)
+            if (existingOrders.Count > 0)
             {
                 ValidateClientOutstandingOrderLimit(existingOrders);
             }
-            
+
 
             createOrderEntity.ProductIdInternal = Guid.NewGuid();
             return createOrderEntity;

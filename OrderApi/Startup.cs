@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrderApi.DAL;
+using OrderApi.ModelFactory;
 using OrderApi.Service;
 
 namespace OrderApi
@@ -27,7 +29,9 @@ namespace OrderApi
             services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             // configure DI for application services
-            services.AddScoped<IUserService, UserService>();            
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOrderEntityFactory, OrderEntityFactory>();
+            services.AddScoped<IOrderApiDAL, OrderApiDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

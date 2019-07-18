@@ -12,6 +12,7 @@ namespace OrderApi.ModelFactory
         public AutoMapperProfile()
         {
             CreateMap<CreateOrder, OrderEntity>();
+            CreateMap<DeliveryAddress, DeliveryAddressEntity>();
         }
     }
 }

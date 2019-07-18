@@ -13,7 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DTOs\OrderApi.DTOs.csproj" />
+    <ProjectReference Include="..\OrderApi.DAL\OrderApi.DAL.csproj" />
     <ProjectReference Include="..\OrderApi.Entities\OrderApi.Entities.csproj" />
+    <ProjectReference Include="..\OrderApi.ModelFactory\OrderApi.ModelFactory.csproj" />
     <ProjectReference Include="..\OrderApi.Service\OrderApi.Service.csproj" />
   </ItemGroup>
 
