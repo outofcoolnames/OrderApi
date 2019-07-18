@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OrderApi.Entities;
@@ -33,6 +34,7 @@ namespace OrderApi
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+        //public async Task InvokeAsync(HttpContext context)
         {
             if (!Request.Headers.ContainsKey("Authorization"))
                 return AuthenticateResult.Fail("Missing Authorization Header");
@@ -65,5 +67,8 @@ namespace OrderApi
 
             return AuthenticateResult.Success(ticket);
         }
-    }
+        public async Task InvokeAsync(HttpContext context)
+        {
+        }
+        }
 }

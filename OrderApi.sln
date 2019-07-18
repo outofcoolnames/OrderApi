@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi", "OrderApi\OrderApi.csproj", "{49848099-F994-4A7A-A223-5311D870D03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi", "OrderApi\OrderApi.csproj", "{49848099-F994-4A7A-A223-5311D870D03E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{2491D9B3-3DC4-400A-BC8B-34AA8336CA90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.DTOs", "DTOs\OrderApi.DTOs.csproj", "{2491D9B3-3DC4-400A-BC8B-34AA8336CA90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.Tests", "OrderApi.Tests\OrderApi.Tests.csproj", "{C44C803C-49BE-44E1-B7DE-55A816FEBCBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Tests", "OrderApi.Tests\OrderApi.Tests.csproj", "{C44C803C-49BE-44E1-B7DE-55A816FEBCBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.Entities", "OrderApi.Entities\OrderApi.Entities.csproj", "{F2E964AA-44FA-49BE-B09E-2BE3CA3D996F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Entities", "OrderApi.Entities\OrderApi.Entities.csproj", "{F2E964AA-44FA-49BE-B09E-2BE3CA3D996F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.DAL", "OrderApi.DAL\OrderApi.DAL.csproj", "{76984D69-19CF-4BE2-8077-0C16B9BD2101}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.DAL", "OrderApi.DAL\OrderApi.DAL.csproj", "{76984D69-19CF-4BE2-8077-0C16B9BD2101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.Utils", "OrderApi.Utils\OrderApi.Utils.csproj", "{F73435BE-C911-4CA7-904B-A5C02A08930E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Utils", "OrderApi.Utils\OrderApi.Utils.csproj", "{F73435BE-C911-4CA7-904B-A5C02A08930E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.Service", "OrderApi.Service\OrderApi.Service.csproj", "{42595617-DB2B-4008-A4E9-155A97CC89A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.Service", "OrderApi.Service\OrderApi.Service.csproj", "{42595617-DB2B-4008-A4E9-155A97CC89A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApi.ModelFactory", "OrderApi.ModelFactory\OrderApi.ModelFactory.csproj", "{0AFBB0C9-E565-4C2C-96FD-25DD5D5824BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApi.ModelFactory", "OrderApi.ModelFactory\OrderApi.ModelFactory.csproj", "{0AFBB0C9-E565-4C2C-96FD-25DD5D5824BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

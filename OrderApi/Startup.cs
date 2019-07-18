@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,12 @@ namespace OrderApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            // configure basic authentication 
+            services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,13 +47,13 @@ namespace OrderApi
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            // configure basic authentication 
-            app.UseMiddleware<BasicAuthenticationHandler>();
-
-            // configure DI for application services
+            // configure DI
             var builder = new ContainerBuilder();
             builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<HttpUtils>().As<IHttpUtils>().SingleInstance();
+
+            // configure basic authentication 
+            app.UseAuthentication();
         }
     }
 }

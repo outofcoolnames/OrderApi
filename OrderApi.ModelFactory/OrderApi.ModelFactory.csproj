@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DTOs\DTOs.csproj" />
+    <ProjectReference Include="..\DTOs\OrderApi.DTOs.csproj" />
     <ProjectReference Include="..\OrderApi.Entities\OrderApi.Entities.csproj" />
   </ItemGroup>
 
