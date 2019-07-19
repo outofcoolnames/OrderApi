@@ -13,6 +13,8 @@ namespace OrderApi.ModelFactory
         {
             CreateMap<CreateOrder, OrderEntity>();
             CreateMap<DeliveryAddress, DeliveryAddressEntity>();
+            CreateMap<OrderEntity, CreateOrder>();
+            CreateMap<DeliveryAddressEntity, DeliveryAddress>();
         }
     }
 }

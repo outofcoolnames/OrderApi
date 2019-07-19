@@ -14,6 +14,16 @@ namespace OrderApi.DAL
             _configuration = configuration;
         }
         /// <summary>
+        /// Get the order by the orderId
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public OrderEntity Get(string client, Guid orderId)
+        {
+            return GetOrders(client)
+                .Find(f => f.OrderId == orderId);            
+        }
+        /// <summary>
         /// Insert an order entity into the database
         /// </summary>
         /// <param name="createOrderEntity">The CreateOrderEntity instance insert</param>
@@ -27,7 +37,7 @@ namespace OrderApi.DAL
             }
 
 
-            createOrderEntity.ProductIdInternal = Guid.NewGuid();
+            createOrderEntity.OrderId = Guid.NewGuid();
             return createOrderEntity;
         }
         private List<OrderEntity> GetOrders(string client)
@@ -48,7 +58,7 @@ namespace OrderApi.DAL
                         State = string.Empty
                     },
                     ProductId = Guid.NewGuid(),
-                    ProductIdInternal = Guid.NewGuid(),
+                    OrderId = Guid.NewGuid(),
                     Quantity = 0,
                     UnitPrice = 1
                 }

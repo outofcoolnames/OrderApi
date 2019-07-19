@@ -24,9 +24,9 @@ namespace OrderApi.Entities
         /// </summary>
         public DeliveryAddressEntity DeliveryAddress { get; set; }
         /// <summary>
-        /// The internal identifier for the supplied product
+        /// The identifier for the order
         /// </summary>
-        public Guid? ProductIdInternal { get; set; }
+        public Guid? OrderId { get; set; }
         /// <summary>
         /// The client creating the order
         /// </summary>

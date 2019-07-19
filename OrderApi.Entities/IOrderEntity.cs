@@ -26,7 +26,7 @@ namespace OrderApi.Entities
         /// <summary>
         /// The internal identifier for the supplied product
         /// </summary>
-        Guid? ProductIdInternal { get; set; }
+        Guid? OrderId { get; set; }
         /// <summary>
         /// The client creating the order
         /// </summary>

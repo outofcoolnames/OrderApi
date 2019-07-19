@@ -31,6 +31,7 @@ namespace OrderApi
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderEntityFactory, OrderEntityFactory>();
+            services.AddScoped<ICreateOrderFactory, CreateOrderFactory>();
             services.AddScoped<IOrderApiDAL, OrderApiDAL>();
         }
 

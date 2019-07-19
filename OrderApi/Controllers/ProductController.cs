@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.DAL;
 using OrderApi.ModelFactory;
@@ -15,27 +16,33 @@ namespace OrderApi.Controllers
     public class ProductController : ControllerBase
     {
         private IOrderEntityFactory _orderEntityFactory;
+        private ICreateOrderFactory _createOrderFactory;
         private IOrderApiDAL _dal;
-        public ProductController(IOrderEntityFactory orderEntityFactory, IOrderApiDAL dal)
+        public ProductController(IOrderEntityFactory orderEntityFactory, ICreateOrderFactory createOrderFactory, IOrderApiDAL dal)
         {
-            _orderEntityFactory = orderEntityFactory;
+            _orderEntityFactory = orderEntityFactory;            
+            _createOrderFactory = createOrderFactory;
             _dal = dal;
-        }
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        }        
 
-        // GET api/values/5
+        // GET api/Product/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<string> Get(Guid orderId)
         {
-            return "value";
+            var client = GetClient(Request);
+            var dalResponse = _dal.Get(client,orderId);
+            if(dalResponse != null)
+            {
+                var dto = _createOrderFactory.GetCreateOrder(dalResponse);
+                return Ok(dto);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        // POST api/values
+        // POST api/Product
         /// <summary>
         /// Receive a CreateOrder
         /// </summary>
@@ -43,19 +50,29 @@ namespace OrderApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] CreateOrder dto)
         {
-            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]).Parameter;
-            string decodedToken = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader));            
-            var client = decodedToken.Substring(0, decodedToken.IndexOf(":"));
+            var client = GetClient(Request);
              var order = _orderEntityFactory.GetOrderEntity(dto, client);
             try
             {
-                _dal.Insert(order); //dal may throw exceptions...
+                var response = _dal.Insert(order); //dal may throw exceptions...
+                return CreatedAtRoute("/api/Product/", response.OrderId);
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok();
-        }       
+            
+        }
+        /// <summary>
+        /// Get the client from the Basic auth supplied
+        /// </summary>
+        /// <param name="request">The current request</param>
+        /// <returns>THe username supplied</returns>
+        private string GetClient(HttpRequest request)
+        {
+            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]).Parameter;
+            string decodedToken = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader));
+            return decodedToken.Substring(0, decodedToken.IndexOf(":"));
+        }
     }
 }
