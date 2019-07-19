@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrderApi.DAL;
 using OrderApi.ModelFactory;
 using OrderApi.Service;
+using OrderApi.Utils;
 
 namespace OrderApi
 {
@@ -33,6 +34,7 @@ namespace OrderApi
             services.AddScoped<IOrderEntityFactory, OrderEntityFactory>();
             services.AddScoped<ICreateOrderFactory, CreateOrderFactory>();
             services.AddScoped<IOrderApiDAL, OrderApiDAL>();
+            services.AddScoped<IRequestUtils, RequestUtils>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

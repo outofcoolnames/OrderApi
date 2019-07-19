@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.DAL;
 using OrderApi.ModelFactory;
+using OrderApi.Utils;
 
 namespace OrderApi.Controllers
 {
@@ -18,18 +19,20 @@ namespace OrderApi.Controllers
         private IOrderEntityFactory _orderEntityFactory;
         private ICreateOrderFactory _createOrderFactory;
         private IOrderApiDAL _dal;
-        public ProductController(IOrderEntityFactory orderEntityFactory, ICreateOrderFactory createOrderFactory, IOrderApiDAL dal)
+        private IRequestUtils _requestUtils;
+        public ProductController(IOrderEntityFactory orderEntityFactory, ICreateOrderFactory createOrderFactory, IOrderApiDAL dal, IRequestUtils requestUtils)
         {
             _orderEntityFactory = orderEntityFactory;            
             _createOrderFactory = createOrderFactory;
             _dal = dal;
+            _requestUtils = requestUtils;
         }        
 
         // GET api/Product/5
         [HttpGet("{id}")]
         public ActionResult<string> Get(Guid orderId)
         {
-            var client = GetClient(Request);
+            var client = _requestUtils.GetClient(Request);
             var dalResponse = _dal.Get(client,orderId);
             if(dalResponse != null)
             {
@@ -50,7 +53,7 @@ namespace OrderApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] CreateOrder dto)
         {
-            var client = GetClient(Request);
+            var client = _requestUtils.GetClient(Request);
              var order = _orderEntityFactory.GetOrderEntity(dto, client);
             try
             {
@@ -62,17 +65,6 @@ namespace OrderApi.Controllers
                 return BadRequest(ex.Message);
             }
             
-        }
-        /// <summary>
-        /// Get the client from the Basic auth supplied
-        /// </summary>
-        /// <param name="request">The current request</param>
-        /// <returns>THe username supplied</returns>
-        private string GetClient(HttpRequest request)
-        {
-            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]).Parameter;
-            string decodedToken = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader));
-            return decodedToken.Substring(0, decodedToken.IndexOf(":"));
-        }
+        }        
     }
 }
