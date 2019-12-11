@@ -29,7 +29,7 @@ namespace OrderApi.Controllers
         }        
 
         // GET api/Product/5
-        [HttpGet("{id}")]
+        [HttpGet]
         public ActionResult<string> Get(Guid orderId)
         {
             var client = _requestUtils.GetClient(Request);
