@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Options;
 using OrderApi.Entities;
+using OrderApi.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +9,8 @@ namespace OrderApi.DAL
 {
     public class OrderApiDAL : IOrderApiDAL
     {
-        private readonly IConfiguration _configuration = null;
-        public OrderApiDAL(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        private readonly IOptions<ApiAppSettings> config;
+        
         /// <summary>
         /// Get the order by the orderId
         /// </summary>
@@ -20,8 +18,7 @@ namespace OrderApi.DAL
         /// <returns></returns>
         public OrderEntity Get(string client, Guid orderId)
         {
-            return GetOrders(client)
-                .Find(f => f.OrderId == orderId);            
+            return GetOrders(client)[0];    
         }
         /// <summary>
         /// Insert an order entity into the database
@@ -71,9 +68,8 @@ namespace OrderApi.DAL
         /// <param name="existingOrders">The list of existing orders</param>
         private void ValidateOrder(List<OrderEntity> existingOrders)
         {
-            decimal clientOutstandingOrderLimit = Convert.ToDecimal(_configuration["ClientOutstandingOrderLimit"]);
-            decimal existingOrderTotal = 0;
-            int existingOrderQuantityLimit = Convert.ToInt32(_configuration["ExistingOrderQuantityLimit"]);
+            decimal clientOutstandingOrderLimit = 100;//config.Value.ClientOutstandingOrderLimit;
+            decimal existingOrderTotal = 0;            
             int existingOrderTotalQuantity = 0;
 
             foreach (var order in existingOrders)
@@ -92,13 +88,13 @@ namespace OrderApi.DAL
 
                 if (existingOrderTotal > clientOutstandingOrderLimit)
                 {
-                    string error = string.Format("The client has outstanding orders with a total value in excess of {0} Euro", _configuration["ClientOutstandingOrderLimit"]);
+                    string error = string.Format("The client has outstanding orders with a total value in excess of {0} Euro", 100);
                     throw new ApplicationException(error);
                 }
 
-                if(existingOrderTotalQuantity > existingOrderQuantityLimit)
+                if(existingOrderTotalQuantity > 100)
                 {
-                    string error = string.Format("The more than {0} of a Product is already on order", existingOrderQuantityLimit);
+                    string error = string.Format("The more than {0} of a Product is already on order", 100);
                     throw new ApplicationException(error);
                 }
             }

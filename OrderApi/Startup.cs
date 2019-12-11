@@ -14,12 +14,12 @@ namespace OrderApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
 
-        public IConfiguration Configuration { get; }
+        public IConfigurationRoot Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,6 +35,12 @@ namespace OrderApi
             services.AddScoped<ICreateOrderFactory, CreateOrderFactory>();
             services.AddScoped<IOrderApiDAL, OrderApiDAL>();
             services.AddScoped<IRequestUtils, RequestUtils>();
+
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            //services.Configure<ApiAppSettings>(Configuration.GetSection("BusinessLogic"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +58,13 @@ namespace OrderApi
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            
+
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            Configuration = builder.Build();
+
             // configure basic authentication 
             app.UseAuthentication();
         }
