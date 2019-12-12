@@ -49,7 +49,7 @@ namespace OrderApi.Controllers
         /// <summary>
         /// Receive a CreateOrder
         /// </summary>
-        /// <param name="dto">A CreateOrder instance</param>
+        /// <param name="dto">A CreateOrder instance.</param>
         [HttpPost]
         public IActionResult Post([FromBody] CreateOrder dto)
         {
